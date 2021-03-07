@@ -31,9 +31,9 @@ rootProject.name = 'study-spring-boot-security'
         }
 
         [
-                "src/main/java/com/study/spring-boot-security",
+                "src/main/java/com/study/security",
                 "src/main/resources",
-                "src/test/java/com/study/spring-boot-security",
+                "src/test/java/com/study/security",
                 "src/test/resources"
         ].each {srcDir->
             def srcFolder = new File(subDir.absolutePath, srcDir)
