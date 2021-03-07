@@ -3,5 +3,7 @@
 dependencies {
 
     implementation("$boot:spring-boot-starter-web")
+
+    compile project(":component-common-utils")
 }
 
