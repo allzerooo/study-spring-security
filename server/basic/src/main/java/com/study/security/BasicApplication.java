@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BasicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BasicApplication.class, args);
+
+        Person person = Person.builder().name("test").build();
+        System.out.println(person);
+
+//        SpringApplication.run(BasicApplication.class, args);
     }
 }
