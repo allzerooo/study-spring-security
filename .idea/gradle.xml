@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/component/common-utils" />
+            <option value="$PROJECT_DIR$/server/basic" />
           </set>
         </option>
       </GradleProjectSettings>
