@@ -11,6 +11,6 @@ public class BasicApplication {
         Person person = Person.builder().name("test").build();
         System.out.println(person);
 
-//        SpringApplication.run(BasicApplication.class, args);
+        SpringApplication.run(BasicApplication.class, args);
     }
 }

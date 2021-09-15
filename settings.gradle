@@ -7,7 +7,7 @@
  * in the user manual at https://docs.gradle.org/6.8.3/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'study-spring-boot-security'
+rootProject.name = 'study-spring-security'
 
 ["component", "web", "server"].each {
 
