@@ -3,6 +3,7 @@ server:
 
 spring:
   security:
+    # yml에서는 user를 한명만 추가할 수 있다
     user:
       name: user1
       password: 1111
