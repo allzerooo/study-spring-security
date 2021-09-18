@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = true)    // security 필터를 어떻게 구성했는지 터미널 로그로 확인할 수 있음
 @EnableGlobalMethodSecurity(prePostEnabled = true)  // pre post로 권한 체크를 하겠다 -> 권한 체크 모듈이 작동됨
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
