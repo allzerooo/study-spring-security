@@ -13,7 +13,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(request->{
                     request
-                            .antMatchers("/**").permitAll()
+                            .antMatchers("/").permitAll() // 루트 페이지 접근은 모두 허용
+                            .anyRequest().authenticated()   // anyRequest에 대해서는 허락을 받고 들어오도록
                             ;
                 })
                 ;
