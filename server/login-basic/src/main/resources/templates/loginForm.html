@@ -12,6 +12,7 @@
 <div class="container center-contents">
     <div class="row">
         <!-- thymeleaf이 제공하는 action만 써도 csrf 토근이 자동으로 걸리게 된다 -->
+        <!-- <input type="hidden" name="_csrf" value="f636a06b-6ce8-4b98-94d7-39da331a8698"> 이런 코드가 추가됨 -->
         <form class="form-signin" method="post" th:action="@{/login}">
             <h1 class="h3 mb-3 font-weight-normal"> 로그인 </h1>
             <label for="username" class="sr-only">로그인 아이디</label>
