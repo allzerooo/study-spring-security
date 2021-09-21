@@ -1,14 +1,49 @@
 package com.study.security.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 
 @EnableWebSecurity(debug = true)
+// 컨트롤러에 설정해둔 ROLE 대로( @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')") ) 페이지에 접근되도록 제한
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser(
+                        // withDefaultPasswordEncoder는 Deprecated 되었지만 테스트에 한정해서 사용
+                        // withDefaultPasswordEncoder를 사용하면 따로 passwordEncoder를 정의하지 않아도 된다
+                        User.withDefaultPasswordEncoder()
+                                .username("user1")
+                                .password("1111")
+                                .roles("USER")
+                ).withUser(
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("2222")
+                        .roles("ADMIN")
+        );
+
+    }
+
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        // 관리자는 USER가 할 수 있는걸 다 할 수 있게 부여
+        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
+        return roleHierarchy;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,8 +57,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // usernamepassword를 formLogin으로 설정. login 페이지를 정해주지 않으면 DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter 가 동작을 하게 된다
                 .formLogin(
                         // permitAll을 하지 않으면 anyRequest().authenticated() 에 의해 로그인 페이지로 이동하고, 로그인 페이지는 접근할 수 없기 때문에 무한루프에 빠질 수 있다
-                        login -> login.loginPage("/login").permitAll()
+                        // default login page가 없으면 default logout page도 없다
+                        login -> login.loginPage("/login")
+                        .permitAll()
+                        // 로그인 성공 시 이동할 페이지. false로 하면 특정 페이지에 접근 중 로그인이 필요할 때 로그인 후 다시 그 페이지로 이동한다
+                        .defaultSuccessUrl("/", false)
+                        .failureUrl("/login-error")
                 )
+                .logout(logout -> logout.logoutSuccessUrl("/"))
+                // 권한이없는 페이지에 접근했을 때의 페이지
+                .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"))
                 ;
     }
 
