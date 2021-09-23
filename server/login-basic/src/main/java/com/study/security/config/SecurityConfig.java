@@ -1,5 +1,6 @@
 package com.study.security.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -15,7 +16,10 @@ import org.springframework.security.core.userdetails.User;
 @EnableWebSecurity(debug = true)
 // 컨트롤러에 설정해둔 ROLE 대로( @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')") ) 페이지에 접근되도록 제한
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final CustomAuthDetails customAuthDetails;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         // 로그인 성공 시 이동할 페이지. false로 하면 특정 페이지에 접근 중 로그인이 필요할 때 로그인 후 다시 그 페이지로 이동한다
                         .defaultSuccessUrl("/", false)
                         .failureUrl("/login-error")
+                        .authenticationDetailsSource(customAuthDetails)
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 // 권한이없는 페이지에 접근했을 때의 페이지
