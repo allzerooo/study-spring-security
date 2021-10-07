@@ -1,6 +1,7 @@
 package com.study.security.config;
 
 import com.study.security.note.NoteService;
+import com.study.security.notice.NoticeService;
 import com.study.security.user.User;
 import com.study.security.user.UserService;
 import lombok.RequiredArgsConstructor;
