@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); // Spring Security가 기본으로 사용하는 인코더
     }
 
     // 스프링 시큐리티는 기본적으로 모든 페이지를 다 막아둔다
@@ -43,8 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.antMatcher("/api/**"); // 어떤 request에 대해서 필터 체인이 동작할 것인지 설정
         http.authorizeRequests((requests) ->
 //                requests.anyRequest().authenticated() // 모든 페이지를 다 인증해라
-                requests.antMatchers("/").permitAll()   // / 주소는 사용자에게 다 접근을 허락해라
-                        .anyRequest().authenticated()
+                requests.antMatchers("/").permitAll()   // "/" 주소는 모든 사용자에게 접근을 허락
+                        .anyRequest().authenticated()   // 나머지는 인증해야 접근을 허락
         );
         http.formLogin();
         http.httpBasic();
