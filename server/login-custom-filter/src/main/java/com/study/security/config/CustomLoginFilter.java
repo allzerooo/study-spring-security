@@ -1,5 +1,7 @@
 package com.study.security.config;
 
+import com.study.security.student.StudentAuthenticationToken;
+import com.study.security.teacher.TeacherAuthenticationToken;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +23,23 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 		username = username.trim();
 		String password = obtainPassword(request);
 		password = (password != null) ? password : "";
-		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
-		return this.getAuthenticationManager().authenticate(authRequest);
+
+		String type = request.getParameter("type"); // 학생인지, 선생님인지
+
+		if (type == null || !type.equals("teacher")) {
+			// student
+			StudentAuthenticationToken token = StudentAuthenticationToken.builder()
+					.credentials(username)
+					.build();
+
+			return this.getAuthenticationManager().authenticate(token);
+		} else {
+			// teacher
+			TeacherAuthenticationToken token = TeacherAuthenticationToken.builder()
+					.credentials(username)
+					.build();
+
+			return this.getAuthenticationManager().authenticate(token);
+		}
 	}
 }

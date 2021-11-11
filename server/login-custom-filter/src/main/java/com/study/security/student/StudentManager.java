@@ -22,9 +22,9 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
     // but, supports() 메서드에서 UsernamePasswordAuthenticationToken을 대상으로 authentication을 발행해주기로 했기 때문에
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-        if (studentDB.containsKey(token.getName())) {
-            Student student = studentDB.get(token.getName());
+        StudentAuthenticationToken token = (StudentAuthenticationToken) authentication;
+        if (studentDB.containsKey(token.getCredentials())) {
+            Student student = studentDB.get(token.getCredentials());
             // studentAuthenticationToken을 만들어서 return
             return StudentAuthenticationToken.builder()
                     .principal(student)
@@ -39,7 +39,7 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
     public boolean supports(Class<?> authentication) {
         // 우리가 UsernamePasswordAuthenticationFilter를 통해서 토큰을 받을것이기 때문에
         // UsernamePasswordAuthenticationToken을 받으면 검증해주는 provider로 동작하겠다고 선언
-        return authentication == UsernamePasswordAuthenticationToken.class;
+        return authentication == StudentAuthenticationToken.class;
     }
 
     // InitializingBean에 의해 빈이 초기화되었을 때 실핼되는 코드

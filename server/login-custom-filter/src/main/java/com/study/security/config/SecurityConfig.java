@@ -55,7 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .defaultSuccessUrl("/", false)
 //                .failureUrl("/login-error")
 //        )
-        .addFilterAt(customLoginFilter, UsernamePasswordAuthenticationFilter.class)   // UsernamePasswordAuthenticationFilter 자리를 CustomLoginFilter로 교체
+
+        // UsernamePasswordAuthenticationFilter 자리를 CustomLoginFilter로 교체
+        // 이렇게 하게 되면 defaultSuccessUrl, failureUrl 등을 따로 정의해주거나
+        // 아니면 .formLogin()의 주석을 풀고 customLoginFilter와 같이 사용해도 된다
+        .addFilterAt(customLoginFilter, UsernamePasswordAuthenticationFilter.class)
         .logout(logout -> logout.logoutSuccessUrl("/"))
         .exceptionHandling(e -> e.accessDeniedPage("/access-denied"));
     }
