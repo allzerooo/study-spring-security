@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @Component
-public class CustomAuthDetails implements AuthenticationDetailsSource<HttpServletRequest, RequestInfo> {
+public class CustomAuthDetails implements AuthenticationDetailsSource<HttpServletRequest, RequestInfo> {    // 넘겨줄 객체인 RequestInfo는 원하는대로 생성한 것
 
     @Override
     public RequestInfo buildDetails(HttpServletRequest request) {

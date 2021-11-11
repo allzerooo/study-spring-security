@@ -58,15 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .anyRequest().authenticated()   // anyRequest에 대해서는 허락을 받고 들어오도록
                             ;
                 })
-                // usernamepassword를 formLogin으로 설정. login 페이지를 정해주지 않으면 DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter 가 동작을 하게 된다
+                // UsernamePasswordAuthenticationFilter는 formLogin으로 설정. login 페이지를 정해주지 않으면 DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter 가 동작을 하게 된다
                 .formLogin(
-                        // permitAll을 하지 않으면 anyRequest().authenticated() 에 의해 로그인 페이지로 이동하고, 로그인 페이지는 접근할 수 없기 때문에 무한루프에 빠질 수 있다
-                        // default login page가 없으면 default logout page도 없다
-                        login -> login.loginPage("/login")
-                        .permitAll()
+                        login -> login.loginPage("/login")  // loginPage를 설정하게 되면 default login page도 없고, default logout page도 없다. 따라서 default logout url인 "/logout"을 처리해줄 페이지나 버튼을 따로 만들어야 한다
+                        .permitAll()  // permitAll을 하지 않으면 anyRequest().authenticated() 에 의해 로그인 페이지로 이동하고, 로그인 페이지는 접근할 수 없는 페이지이기 때문에 루트 페이지로 이동하면서 무한루프에 빠질 수 있다
                         // 로그인 성공 시 이동할 페이지. false로 하면 특정 페이지에 접근 중 로그인이 필요할 때 로그인 후 다시 그 페이지로 이동한다
                         .defaultSuccessUrl("/", false)
-                        .failureUrl("/login-error")
+                        .failureUrl("/login-error") // default URL은 "/login?error"
                         .authenticationDetailsSource(customAuthDetails)
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/"))
@@ -80,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // request에 인증을 걸었을 때 css와 같은 리소스도 접근되지 않기 때문에 제외시켜줌
         web.ignoring()
                 .requestMatchers(
-                        PathRequest.toStaticResources().atCommonLocations()
+                        PathRequest.toStaticResources().atCommonLocations() // static 디렉토리 밑에 있는 리소스들이 해당됨
                 );
     }
 }
