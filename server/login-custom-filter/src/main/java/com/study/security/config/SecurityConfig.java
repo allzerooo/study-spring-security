@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity(debug = true)
@@ -36,20 +37,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        
+
+        CustomLoginFilter customLoginFilter = new CustomLoginFilter(authenticationManager());
 
         http
         .authorizeRequests(request->
-                request.antMatchers("/").permitAll()
+                request.antMatchers("/", "/login").permitAll()
                 .anyRequest().authenticated()
         )
-        .formLogin(
-                // login page를 통해서 usernamePasswordAuthenticationFilter가 동작하고
-                // usernamePasswordAuthenticationFilter는 usernamePasswordAuthenticationToken을 발행하기 때문에
-                // usernamePasswordAuthenticationToken을 대상으로 한 StudentManager가 발행을 해주게 된다
-                login -> login.loginPage("/login")
-                .permitAll()
-        );
+            // customLoginFilter를 적용하기 위해 주석처리
+//        .formLogin(
+//                // login page를 통해서 usernamePasswordAuthenticationFilter가 동작하고
+//                // usernamePasswordAuthenticationFilter는 usernamePasswordAuthenticationToken을 발행하기 때문에
+//                // usernamePasswordAuthenticationToken을 대상으로 한 StudentManager가 발행을 해주게 된다
+//                login -> login.loginPage("/login")
+//                .permitAll()
+//                .defaultSuccessUrl("/", false)
+//                .failureUrl("/login-error")
+//        )
+        .addFilterAt(customLoginFilter, UsernamePasswordAuthenticationFilter.class)   // UsernamePasswordAuthenticationFilter 자리를 CustomLoginFilter로 교체
+        .logout(logout -> logout.logoutSuccessUrl("/"))
+        .exceptionHandling(e -> e.accessDeniedPage("/access-denied"));
     }
 
     @Override
