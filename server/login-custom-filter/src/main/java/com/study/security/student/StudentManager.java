@@ -18,6 +18,8 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
     // StudentManager는 Student리스트를 가지고 있어야 된다. 따라서, 원래는 여기에서 DB 조회를 한다
     private HashMap<String, Student> studentDB = new HashMap<>();
 
+    // Authentication Token을 StudentAuthenticationToken으로 발행해주기
+    // but, supports() 메서드에서 UsernamePasswordAuthenticationToken을 대상으로 authentication을 발행해주기로 했기 때문에
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -40,13 +42,13 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
         return authentication == UsernamePasswordAuthenticationToken.class;
     }
 
+    // InitializingBean에 의해 빈이 초기화되었을 때 실핼되는 코드
     @Override
     public void afterPropertiesSet() throws Exception {
-        // InitializingBean에 의해 빈이 초기화되었을 때 실핼되는 코드
         Set.of(
-                new Student("hong", "홍길동", Set.of(new SimpleGrantedAuthority("ROLE_USER"))),
-                new Student("kang", "강아지", Set.of(new SimpleGrantedAuthority("ROLE_USER"))),
-                new Student("rang", "호랑이", Set.of(new SimpleGrantedAuthority("ROLE_USER")))
+                new Student("hong", "홍길동", Set.of(new SimpleGrantedAuthority("ROLE_STUDENT"))),
+                new Student("kang", "강아지", Set.of(new SimpleGrantedAuthority("ROLE_STUDENT"))),
+                new Student("rang", "호랑이", Set.of(new SimpleGrantedAuthority("ROLE_STUDENT")))
         ).forEach(s -> studentDB.put(s.getId(), s));
     }
 }
