@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/component/common-utils" />
             <option value="$PROJECT_DIR$/server/basic" />
+            <option value="$PROJECT_DIR$/server/basic-authentication-test" />
             <option value="$PROJECT_DIR$/server/login-basic" />
             <option value="$PROJECT_DIR$/server/login-custom-filter" />
             <option value="$PROJECT_DIR$/server/personal-security-notes" />
