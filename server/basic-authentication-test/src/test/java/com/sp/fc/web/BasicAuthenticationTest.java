@@ -56,6 +56,7 @@ public class BasicAuthenticationTest {
     @DisplayName("3. 인증성공2 ")
     @Test
     void test_3() {
+        // TestRestTemplate는 Basic 토큰을 넣어서 요청해준다
         TestRestTemplate testClient = new TestRestTemplate("user1", "1111");
         String resp = testClient.getForObject(greetingUrl(), String.class);
         assertEquals("hello", resp);
@@ -64,6 +65,7 @@ public class BasicAuthenticationTest {
     @DisplayName("4. POST 인증")
     @Test
     void test_4() {
+        // POST는 csrf가 작동하기 때문에 security config에서 disable 해줘야 POST 요청이 가능하다
         TestRestTemplate testClient = new TestRestTemplate("user1", "1111");
         ResponseEntity<String> resp = testClient.postForEntity(greetingUrl(), "jongwon", String.class);
         assertEquals("hello jongwon", resp.getBody());
