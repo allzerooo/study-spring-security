@@ -65,7 +65,9 @@ public class BasicAuthenticationTest {
     @DisplayName("4. POST 인증")
     @Test
     void test_4() {
-        // POST는 csrf가 작동하기 때문에 security config에서 disable 해줘야 POST 요청이 가능하다
+        // POST는 csrf filter가 작동하기 때문에 security config에서 disable 해줘야 POST 요청이 가능하다
+        // 만약 rest api 방식으로 개발하기 위해 csrf를 disable했는데, 웹 페이지도 동시에 다루고 있어서 csrf를 enable 시켜야 한다면
+        // 서로 상이한 정책이 공존해야 되는 상황이 생길 수 있다
         TestRestTemplate testClient = new TestRestTemplate("user1", "1111");
         ResponseEntity<String> resp = testClient.postForEntity(greetingUrl(), "jongwon", String.class);
         assertEquals("hello jongwon", resp.getBody());
