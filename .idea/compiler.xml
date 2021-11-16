@@ -7,17 +7,21 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar" />
         </processorPath>
-        <module name="study-spring-security.component-common-utils.main" />
         <module name="study-spring-security.server-login-custom-filter.main" />
+        <module name="study-spring-security.server-login-multi-chain.test" />
+        <module name="study-spring-security.component-common-utils.test" />
+        <module name="study-spring-security.server-login-basic.main" />
+        <module name="study-spring-security.server-login-custom-filter.test" />
+        <module name="study-spring-security.web-student-teacher.test" />
+        <module name="study-spring-security.web-student-teacher.main" />
+        <module name="study-spring-security.server-basic.test" />
+        <module name="study-spring-security.component-common-utils.main" />
+        <module name="study-spring-security.server-login-multi-chain.main" />
         <module name="study-spring-security.server-basic-authentication-test.main" />
         <module name="study-spring-security.server-personal-security-notes.test" />
         <module name="study-spring-security.server-basic.main" />
-        <module name="study-spring-security.component-common-utils.test" />
         <module name="study-spring-security.server-basic-authentication-test.test" />
-        <module name="study-spring-security.server-login-basic.main" />
-        <module name="study-spring-security.server-login-custom-filter.test" />
         <module name="study-spring-security.server-login-basic.test" />
-        <module name="study-spring-security.server-basic.test" />
         <module name="study-spring-security.server-personal-security-notes.main" />
       </profile>
     </annotationProcessing>
