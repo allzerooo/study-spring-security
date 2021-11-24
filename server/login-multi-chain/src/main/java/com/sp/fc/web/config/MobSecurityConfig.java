@@ -18,6 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Order(1)
 @Configuration
+// 아래 두 줄은 SecurityConfig와 중복되기 때문에 제거해도 된다
+//@EnableWebSecurity(debug = false)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MobSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final StudentManager studentManager;
