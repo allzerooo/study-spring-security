@@ -15,8 +15,6 @@ I
 Wserver/basic-authentication-test/src/main/java/com/sp/fc/web/config/SecurityConfig.java,1/c/1c04e622ea3cff43492997eec9472fbc6344b100
 ]
 -server/basic-authentication-test/build.gradle,e/2/e2be8ab20ff828827ba760173e730eea4944fc11
-W
-'server/login-custom-filter/build.gradle,0/4/040696967a11f52016930729e112638b905e2635
 ƒ
 Sserver/login-multi-chain/src/main/java/com/sp/fc/web/controller/HomeController.java,3/a/3abc48cdfea132f36ece593ff1d510d4ed420e35
 Œ
@@ -27,7 +25,3 @@ Vserver/login-multi-chain/src/main/java/com/sp/fc/web/controller/StudentControll
 \server/login-multi-chain/src/main/java/com/sp/fc/web/teacher/TeacherAuthenticationToken.java,7/8/7858fa4c8a4ba1cf76837872dc7dfd6dadac5efc
 y
 Iserver/login-multi-chain/src/main/java/com/sp/fc/web/teacher/Teacher.java,a/e/aee8b4367abc8256d284d545c5a5bf092a873867
-€
-Pserver/login-multi-chain/src/main/java/com/sp/fc/web/teacher/TeacherManager.java,6/1/6180d72a187d62cfd3c594a8863c984f154d1609
-€
-Pserver/login-multi-chain/src/main/java/com/sp/fc/web/student/StudentManager.java,0/3/03956daefa2dec157c77eb1089d75e45d0b76655

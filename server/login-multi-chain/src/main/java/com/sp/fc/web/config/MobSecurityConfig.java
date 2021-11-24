@@ -13,14 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-/**
- * web에 적용한 코드를 모바일이나 SPA에도 적용하기위해 새로운 필터 체인 프록시를 구성
- */
 @Order(1)
 @Configuration
-// 아래 두 줄은 SecurityConfig와 중복되기 때문에 제거해도 된다
-//@EnableWebSecurity(debug = false)
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MobSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final StudentManager studentManager;
