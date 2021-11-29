@@ -16,8 +16,10 @@
         <module name="study-spring-security.server-login-custom-filter.test" />
         <module name="study-spring-security.web-student-teacher.test" />
         <module name="study-spring-security.component-user-admin.test" />
+        <module name="study-spring-security.server-login-rememberme.main" />
         <module name="study-spring-security.web-student-teacher.main" />
         <module name="study-spring-security.server-basic.test" />
+        <module name="study-spring-security.server-login-rememberme.test" />
         <module name="study-spring-security.component-common-utils.main" />
         <module name="study-spring-security.server-login-multi-chain.main" />
         <module name="study-spring-security.server-login-userdetails.main" />
@@ -31,6 +33,6 @@
         <module name="study-spring-security.server-personal-security-notes.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="14" />
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

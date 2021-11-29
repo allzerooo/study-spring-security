@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="sp_user")
-public class SpUser implements UserDetails {    // DB USER
+public class SpUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class SpUserService implements UserDetailsService {  // SpUser는 UserDetails를 구현
+public class SpUserService implements UserDetailsService {
 
     @Autowired
     private SpUserRepository userRepository;
